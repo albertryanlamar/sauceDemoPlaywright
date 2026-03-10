@@ -56,7 +56,7 @@ export class CheckoutPage extends BasePage{
 
 
     //flow
-    async fillOutForm(firstName:string,lastName:string,zipCode:string){
+    async fillOutForm(firstName:string,lastName:string,zipCode:string):Promise<void>{
         await this.enterFirstName(firstName);
         await this.enterLastName(lastName);
         await this.enterZipCode(zipCode);
