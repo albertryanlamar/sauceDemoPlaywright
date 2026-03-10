@@ -2,13 +2,16 @@ name: Publish Report
 
 on:
   workflow_run:
-    workflows: ["Run Tests"]
+    workflows: ["Playwright Tests"]
     types:
       - completed
 
 defaults:
   run:
     shell: bash
+permissions:
+  actions: read
+  contents: write  # para makapag-push sa gh-pages
 
 jobs:
   publish_report:
