@@ -2,13 +2,13 @@ name: Publish Report
 
 on:
   workflow_run:
-    workflows: ["Playwright Tests"]
+    workflows: ["Run Tests"]
     types:
       - completed
 
-permissions:
-  actions: read
-  contents: write  # para makapag-push sa gh-pages
+defaults:
+  run:
+    shell: bash
 
 jobs:
   publish_report:
@@ -16,14 +16,26 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
+    env:
+      REPORT_PATH: reports/${{ github.event.workflow_run.head_branch }}/${{ github.event.workflow_run.id }}
+
     steps:
-      # 1️⃣ Checkout repository
-      - name: Checkout repository
+      - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: gh-pages
 
-      # 2️⃣ Download reports artifact
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch dashboard script
+        run: |
+          curl -fsSL \
+            "https://github.com/albertryanlamar/sauceDemoPlaywright/${{ github.event.workflow_run.head_sha }}/.github/scripts/generate-dashboard.js" \
+            -o generate-dashboard.js
+
       - name: Download reports artifact
         uses: actions/download-artifact@v4
         with:
@@ -32,23 +44,29 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 3️⃣ Ensure index.html exists (to avoid 404)
-      - name: Commit and push to gh-pages
+      - name: Regenerate dashboard
+        env:
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          REPORT_PATH: ${{ env.REPORT_PATH }}
+          KEEP_RUNS: 10
+          KEEP_FAILED_RUNS: 30
+        run: |
+          node generate-dashboard.js
+
+      - name: Commit and push
         timeout-minutes: 3
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git switch gh-pages || git checkout -b gh-pages
-          # Copy dashboard index.html to root
-          cp report/index.html ./index.html
+          git add index.html tests.html dashboard.json reports/
+          [ -d failure-archive ] && git add failure-archive/ || true
+          [ -d test-runs ] && git add test-runs/ || true
+          git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}"
 
-          # Add everything
-          git add index.html report/
-
-          # Commit only if there are changes
-          git diff --cached --quiet || git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}"
-
-          # Push to gh-pages
-          until git push origin gh-pages; do
+          until git push; do
             git pull --rebase || { echo "Rebase failed. Manual review required."; exit 1; }
           done
+
+      - name: Annotate workflow with dashboard URL
+        run: |
+          echo "::notice title=📋 Playwright Dashboard::https://albertryanlamar.github.io/sauceDemoPlaywright/"

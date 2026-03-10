@@ -43,7 +43,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter:      [ 
        ['junit',{outputFile:'report/junit-report/junit.xml'}],
-       ['html',{open:'always',outputFolder:'report/html-report'}],
+       ['html',{open:'never',outputFolder:'report/html-report'}],
        ['allure-playwright',{ resultsDir: 'report/allure-results' }],
        //[reportPortal.default, { configFile: './reportPortal.config.js' }] // ✅ RP integration,
     ],
