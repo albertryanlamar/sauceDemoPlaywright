@@ -13,29 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download Allure report
+      - name: Download reports artifact
         uses: actions/download-artifact@v4
         with:
-          name: allure-report
-          path: report/allure-report
-
-      - name: Download Playwright HTML report
-        uses: actions/download-artifact@v4
-        with:
-          name: playwright-report
-          path: report/html-report
-
-      - name: Download JUnit report
-        uses: actions/download-artifact@v4
-        with:
-          name: junit-report
-          path: report/junit-report
+          name: reports
+          path: report
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./report
-          destination_dir: playwright-report
           user_name: 'github-actions[bot]'
           user_email: '41898282+github-actions[bot]@users.noreply.github.com'
