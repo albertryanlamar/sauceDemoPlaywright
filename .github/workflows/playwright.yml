@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      ENV: uat
+      NODE_ENV: uat
 
     steps:
     - name: Checkout Repository
@@ -27,9 +27,6 @@ jobs:
         docker run \
         -v ${{ github.workspace }}/report:/app/report \
         playwright-tests
-
-    - name: Generate Allure Report
-      run: npx allure generate report/allure --clean -o report/allure-results
 
     - name: Upload Allure Report Artifact
       if: always()
