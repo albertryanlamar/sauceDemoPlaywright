@@ -27,27 +27,33 @@ jobs:
         docker run \
         -v ${{ github.workspace }}/report:/app/report \
         playwright-tests
-
-    - name: Upload Allure Report Artifact
+    - name: Upload reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: "allure-report"
-        path: "report/allure-results"
-        retention-days: 30
+        name: reports
+        path: report
+   
+    #- name: Upload Allure Report Artifact
+    #  if: always()
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: "allure-report"
+    #    path: "report/allure-results"
+    #    retention-days: 30
 
-    - name: Upload Playwright HTML Report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: playwright-report
-        path: report/html-report/
-        retention-days: 30
+    # - name: Upload Playwright HTML Report
+    #  if: always()
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: playwright-report
+    #    path: report/html-report/
+    #    retention-days: 30
 
-    - name: Upload JUnit Report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: junit-report
-        path: report/junit-report/junit.xml
-        retention-days: 30
+    #- name: Upload JUnit Report
+    #  if: always()
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: junit-report
+    #    path: report/junit-report/junit.xml
+    #    retention-days: 30
