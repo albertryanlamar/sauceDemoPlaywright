@@ -36,8 +36,8 @@ jobs:
       - name: Fetch dashboard script
         run: |
           curl -fsSL \
-            "https://github.com/albertryanlamar/sauceDemoPlaywright/${{ github.event.workflow_run.head_sha }}/.github/scripts/generate-dashboard.js" \
-            -o generate-dashboard.js
+          "https://raw.githubusercontent.com/albertryanlamar/sauceDemoPlaywright/${{ github.event.workflow_run.head_sha }}/.github/scripts/generate-dashboard.js" \
+          -o generate-dashboard.js
 
       - name: Download reports artifact
         uses: actions/download-artifact@v4
