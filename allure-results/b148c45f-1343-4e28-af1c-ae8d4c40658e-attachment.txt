@@ -1,0 +1,12 @@
+Before all tests
+Executing step 1: Login_valid
+Executing step: Login_valid
+This is a login step.
+Params in Login not specified
+Executing step 2: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack
+Executing step: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack
+This is an add to cart step.
+This is an add to cart step. [ 'Sauce Labs Bike Light', 'Sauce Labs Backpack' ]
+Executing step 3: viewCart
+Executing step: viewCart
+This is a view cart step. [ 'Sauce Labs Bike Light', 'Sauce Labs Backpack' ]
