@@ -29,14 +29,14 @@ jobs:
         playwright-tests
 
     - name: Generate Allure Report
-      run: npx allure generate report/allure --clean -o report/allure-report
+      run: npx allure generate report/allure --clean -o report/allure-results
 
     - name: Upload Allure Report Artifact
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: "allure-report"
-        path: "report/allure-report"
+        path: "report/allure-results"
         retention-days: 30
 
     - name: Upload Playwright HTML Report
@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: playwright-report
-        path: report/html/
+        path: report/html-report/
         retention-days: 30
 
     - name: Upload JUnit Report
@@ -52,5 +52,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: junit-report
-        path: report/junit/junit.xml
+        path: report/junit-report/junit.xml
         retention-days: 30
