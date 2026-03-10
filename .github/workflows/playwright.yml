@@ -27,7 +27,7 @@ jobs:
     - name: Run Playwright tests in Docker
       run: |
         docker run \
-        -v ${{ github.workspace }}/src/report:/app/src/report \
+        -v ${{ github.workspace }}/report:/app/report \
         playwright-tests
 
     # Upload Allure Report
@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: allure-report
-        path: src/report/allure-report
+        path: report/allure-report
         retention-days: 30
 
     # Upload Playwright HTML Report
@@ -45,7 +45,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: playwright-report
-        path: src/report/html-report/
+        path: report/html-report/
         retention-days: 30
 
     # Upload JUnit report
@@ -54,5 +54,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: junit-report
-        path: src/report/junit.xml
+        path: report/junit.xml
         retention-days: 30
