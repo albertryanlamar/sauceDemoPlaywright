@@ -3,7 +3,7 @@ import {tcLoader} from '../../src/utils/commonFunctions';
 import { browserSetUp } from '../../src/components/browserSetUp';
 import { TestExecute } from '../../src/helpers/TestExecute';
 
-let rowstart = 6;
+let rowstart = 5;
 let rowend = 6;
 let tcData:any;
 let page: Page;
