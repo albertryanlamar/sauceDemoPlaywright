@@ -10,8 +10,6 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    container:
-      image: your-dockerhub-username/saucedemoplaywright:latest
     env:
       ENV: uat
 
@@ -19,8 +17,16 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Run Playwright tests
-      run: npx playwright test --grep '@regressStandAlone'
+    # Build Docker image
+    - name: Build Docker Image
+      run: docker build -t playwright-tests .
+
+    # Run tests inside Docker container
+    - name: Run Playwright tests in Docker
+      run: |
+        docker run \
+        -v ${{ github.workspace }}/report:/app/report \
+        playwright-tests
 
     - name: Generate Allure Report
       run: npx allure generate report/allure --clean -o report/allure-report
