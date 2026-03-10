@@ -51,14 +51,3 @@ jobs:
         name: junit-report
         path: report/junit-report/junit.xml
         retention-days: 30
-
-     # Publish to GitHub Pages
-    - name: Publish Reports to GitHub Pages
-      if: always()
-      uses: peaceiris/actions-gh-pages@v6
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./report
-        destination_dir: playwright-report
-        user_name: github-actions[bot]
-        user_email: 41898282+github-actions[bot]@users.noreply.github.com
