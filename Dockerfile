@@ -4,19 +4,17 @@ FROM node:20-bullseye
 # Set working directory
 WORKDIR /usr/src/app
 
-# Copy package files
-COPY package*.json ./
+# Copy package files first to leverage cache
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of your project
+# Copy source code
 COPY . .
 
-# Install Playwright browsers
+# Install Playwright browsers with dependencies
 RUN npx playwright install --with-deps
 
-# Expose report folder to host
+# Expose report folder for artifacts
 VOLUME ["/usr/src/app/report"]
 
 # Default command to run tests
