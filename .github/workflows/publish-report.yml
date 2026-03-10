@@ -5,9 +5,10 @@ on:
     workflows: ["Playwright Tests"]
     types:
       - completed
+
 permissions:
-    actions: read
-    contents: write
+  actions: read
+  contents: write  # para makapag-push sa gh-pages
 
 jobs:
   publish_report:
@@ -16,6 +17,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2️⃣ Download reports artifact
       - name: Download reports artifact
         uses: actions/download-artifact@v4
         with:
@@ -24,10 +32,38 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish Reports to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./report
-          user_name: 'github-actions[bot]'
-          user_email: '41898282+github-actions[bot]@users.noreply.github.com'
+      # 3️⃣ Ensure index.html exists (to avoid 404)
+      - name: Ensure index.html
+        run: |
+          if [ ! -f report/index.html ]; then
+            echo "<!DOCTYPE html>
+            <html>
+            <head><title>Playwright Dashboard</title></head>
+          <body>
+          <h1>Dashboard will appear here</h1>
+          <ul>
+          <li><a href='html-report/index.html'>HTML Report</a></li>
+          <li><a href='allure-results/index.html'>Allure Report</a></li>
+          <li><a href='junit-report/junit.xml'>JUnit XML</a></li>
+          </ul>
+          </body>
+          </html>" > report/index.html
+          fi
+
+      # 4️⃣ Commit and push all reports + dashboard
+      - name: Commit and push to gh-pages
+        timeout-minutes: 3
+        run: |
+          git switch gh-pages || git checkout -b gh-pages
+          git add report/* index.html tests.html dashboard.json
+          [ -d failure-archive ] && git add failure-archive/ || true
+          [ -d test-runs ] && git add test-runs/ || true
+          git diff --cached --quiet || git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}"
+          until git push origin gh-pages; do
+            git pull --rebase || { echo "Rebase failed. Manual review required."; exit 1; }
+          done
+
+      # 5️⃣ Annotate workflow with dashboard URL
+      - name: Annotate workflow with dashboard URL
+        run: |
+          echo "::notice title=📋 Playwright Dashboard::https://${{ github.repository_owner }}.github.io/${{ github.repository }}/"
