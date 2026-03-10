@@ -1,51 +1,34 @@
-name: Publish Playwright Reports
+name: Publish Report
 
 on:
   workflow_run:
-    workflows: ["Run Tests"]   # pangalan ng workflow kung saan nagrurun ang tests
+    workflows: ["Playwright Tests"]
     types:
       - completed
 
 jobs:
   publish_report:
-    name: Publish Reports to GitHub Pages
+    name: Publish Report to GitHub Pages
+    if: always()
     runs-on: ubuntu-latest
-    if: always()  # Kahit may failing tests
+    continue-on-error: true
 
     steps:
-      # 1️⃣ Checkout gh-pages branch
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
 
-      # 2️⃣ Configure Git
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # 3️⃣ Download test reports artifact
-      - name: Download test reports
-        uses: actions/download-artifact@v4
+      - name: Publish Reports to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v6
         with:
-          name: reports
-          path: report
-
-      # 4️⃣ Copy reports to gh-pages folder
-      - name: Copy reports to gh-pages
-        run: |
-          mkdir -p playwright-report
-          cp -r report/* playwright-report/
-
-      # 5️⃣ Commit & push changes
-      - name: Commit and push reports
-        run: |
-          git add playwright-report/
-          git commit -m "Add Playwright reports from run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
-          git push
-
-      # 6️⃣ Dashboard URL notice
-      - name: Dashboard URL
-        run: |
-          echo "::notice title=📋 Playwright Dashboard::https://albertryanlamar.github.io/sauceDemoPlaywright/playwright-report/"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./report
+          destination_dir: playwright-report
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
