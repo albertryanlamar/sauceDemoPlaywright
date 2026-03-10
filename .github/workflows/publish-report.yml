@@ -33,23 +33,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       # 3️⃣ Ensure index.html exists (to avoid 404)
-      - name: Ensure index.html
-        run: |
-          if [ ! -f report/index.html ]; then
-            echo "<!DOCTYPE html>
-            <html>
-            <head><title>Playwright Dashboard</title></head>
-          <body>
-          <h1>Dashboard will appear here</h1>
-          <ul>
-          <li><a href='html-report/index.html'>HTML Report</a></li>
-          <li><a href='allure-results/index.html'>Allure Report</a></li>
-          <li><a href='junit-report/junit.xml'>JUnit XML</a></li>
-          </ul>
-          </body>
-          </html>" > report/index.html
-          fi
-
       - name: Commit and push to gh-pages
         timeout-minutes: 3
         run: |
