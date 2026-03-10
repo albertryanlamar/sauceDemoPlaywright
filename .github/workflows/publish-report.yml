@@ -50,20 +50,22 @@ jobs:
           </html>" > report/index.html
           fi
 
-      # 4️⃣ Commit and push all reports + dashboard
       - name: Commit and push to gh-pages
         timeout-minutes: 3
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git switch gh-pages || git checkout -b gh-pages
-          git add report/* index.html tests.html dashboard.json
-          [ -d failure-archive ] && git add failure-archive/ || true
-          [ -d test-runs ] && git add test-runs/ || true
+          # Copy dashboard index.html to root
+          cp report/index.html ./index.html
+
+          # Add everything
+          git add index.html report/
+
+          # Commit only if there are changes
           git diff --cached --quiet || git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}"
+
+          # Push to gh-pages
           until git push origin gh-pages; do
             git pull --rebase || { echo "Rebase failed. Manual review required."; exit 1; }
           done
-
-      # 5️⃣ Annotate workflow with dashboard URL
-      - name: Annotate workflow with dashboard URL
-        run: |
-          echo "::notice title=📋 Playwright Dashboard::https://${{ github.repository_owner }}.github.io/${{ github.repository }}/"
