@@ -1,0 +1,20 @@
+Before all tests
+Executing step 1: Login
+Executing step: Login
+This is a login step.
+Attempting login with username: standard_user
+Executing step 2: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack
+Executing step: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack
+This is an add to cart step.
+This is an add to cart step. [ 'Sauce Labs Bike Light' ]
+Executing step 3: viewCart
+Executing step: viewCart
+This is a view cart step. [ 'Sauce Labs Bike Light' ]
+Checking in the cart item:Sauce Labs Bike Light
+Executing step 4: checkout_Albert_Lamar_1630
+Executing step: checkout_Albert_Lamar_1630
+Executing step 5: Logout
+Executing step: Logout
+This is a logout step.
+Attempting logout with username: standard_user
+End of steps reached!

@@ -1,0 +1,7 @@
+{
+    "loginPage": {
+        "usernameInput": "'textbox', { name: 'Username' }",
+        "passwordInput": "'textbox', { name: 'Password' }",
+        "loginButton": "'button'"
+    }
+}
