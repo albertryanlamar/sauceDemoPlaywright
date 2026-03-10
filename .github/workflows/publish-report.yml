@@ -37,10 +37,10 @@ jobs:
             "https://raw.githubusercontent.com/jay-yeluru/playwright-demo-js/${{ github.event.workflow_run.head_sha }}/.github/scripts/generate-dashboard.js" \
             -o generate-dashboard.js
 
-      - name: Download reports artifact
+      - name: Download Playwright report artifact
         uses: actions/download-artifact@v4
         with:
-          name: reports
+          name: playwright-report
           path: ${{ env.REPORT_PATH }}
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
