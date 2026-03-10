@@ -1,73 +1,51 @@
-name: Publish Report
+name: Publish Playwright Reports
 
 on:
   workflow_run:
-    workflows: ["Run Tests"]
+    workflows: ["Run Tests"]   # pangalan ng workflow kung saan nagrurun ang tests
     types:
       - completed
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
   publish_report:
-    name: Publish Report to GitHub Pages
-    if: always()
+    name: Publish Reports to GitHub Pages
     runs-on: ubuntu-latest
-    continue-on-error: true
-
-    env:
-      REPORT_PATH: reports/${{ github.event.workflow_run.head_branch }}/${{ github.event.workflow_run.id }}
+    if: always()  # Kahit may failing tests
 
     steps:
+      # 1️⃣ Checkout gh-pages branch
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
 
+      # 2️⃣ Configure Git
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Fetch dashboard script
-        run: |
-          curl -fsSL \
-            "https://raw.githubusercontent.com/jay-yeluru/playwright-demo-js/${{ github.event.workflow_run.head_sha }}/.github/scripts/generate-dashboard.js" \
-            -o generate-dashboard.js
-
-      - name: Download Playwright report artifact
+      # 3️⃣ Download test reports artifact
+      - name: Download test reports
         uses: actions/download-artifact@v4
         with:
-          name: playwright-report
-          path: ${{ env.REPORT_PATH }}
-          run-id: ${{ github.event.workflow_run.id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: reports
+          path: report
 
-      - name: Regenerate dashboard
-        env:
-          BRANCH: ${{ github.event.workflow_run.head_branch }}
-          RUN_ID: ${{ github.event.workflow_run.id }}
-          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          REPORT_PATH: ${{ env.REPORT_PATH }}
-          KEEP_RUNS: 10
-          KEEP_FAILED_RUNS: 30
+      # 4️⃣ Copy reports to gh-pages folder
+      - name: Copy reports to gh-pages
         run: |
-          node generate-dashboard.js
+          mkdir -p playwright-report
+          cp -r report/* playwright-report/
 
-      - name: Commit and push
-        timeout-minutes: 3
+      # 5️⃣ Commit & push changes
+      - name: Commit and push reports
         run: |
-          git add index.html tests.html dashboard.json reports/
-          [ -d failure-archive ] && git add failure-archive/ || true
-          [ -d test-runs ] && git add test-runs/ || true
-          git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}"
+          git add playwright-report/
+          git commit -m "Add Playwright reports from run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
+          git push
 
-          until git push; do
-            git pull --rebase || { echo "Rebase failed. Manual review required."; exit 1; }
-          done
-
-      - name: Annotate workflow with dashboard URL
+      # 6️⃣ Dashboard URL notice
+      - name: Dashboard URL
         run: |
-          echo "::notice title=📋 Playwright Dashboard::https://jay-yeluru.github.io/playwright-demo-js/"
+          echo "::notice title=📋 Playwright Dashboard::https://albertryanlamar.github.io/sauceDemoPlaywright/playwright-report/"
