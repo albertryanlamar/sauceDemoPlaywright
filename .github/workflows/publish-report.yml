@@ -5,7 +5,7 @@ on:
     workflows: ["Playwright Tests"]
     types:
       - completed
-  permissions:
+permissions:
     actions: read
     contents: write
 
