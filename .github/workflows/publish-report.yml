@@ -25,7 +25,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Publish Reports to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v6
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./report
