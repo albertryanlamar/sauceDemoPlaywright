@@ -14,34 +14,31 @@ jobs:
       NODE_ENV: uat
 
     steps:
-    # 1️⃣ Checkout repository
     - name: Checkout Repository
       uses: actions/checkout@v4
-
+      
     # 2️⃣ Create report folders so JSON and HTML have a place
     - name: Create report folders
       run: |
         mkdir -p report/html-report report/allure-report report/json-report report/allure-results
 
-    # 3️⃣ Build Docker image
+    # Build Docker image
     - name: Build Docker Image
       run: docker build -t playwright-tests .
 
-    # 4️⃣ Run Playwright tests inside Docker
+    # Run tests inside Docker container
     - name: Run Playwright tests in Docker
       run: |
         docker run \
-          -v ${{ github.workspace }}/report:/app/report \
-          -w /app \
-          playwright-tests npx playwright test
-
-    # 5️⃣ Upload all reports as artifacts
+        -v ${{ github.workspace }}/report:/app/report \
+        playwright-tests
+        
     - name: Upload reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: reports
-        path: report/
+        path: report
    #-ok
     #- name: Upload Allure Report Artifact
     #  if: always()
