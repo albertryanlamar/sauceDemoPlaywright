@@ -49,7 +49,7 @@ jobs:
       # 4️⃣ Copy custom dashboard HTML from main repo
       - name: Copy custom dashboard
         run: |
-          cp .github/scripts/index.html index.html
+          cp .github/scripts/index.html .
 
       # 5️⃣ Regenerate dashboard JSON (optional, kung meron kang generate-dashboard.js)
       - name: Regenerate dashboard JSON
