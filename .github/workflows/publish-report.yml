@@ -46,28 +46,23 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 4️⃣ Copy custom dashboard HTML from main branch
+      # 4️⃣ Install Allure CLI
+      - name: Install Allure CLI
+        run: |
+          sudo apt-add-repository ppa:qameta/allure -y
+          sudo apt-get update
+          sudo apt-get install allure -y
+
+      # 5️⃣ Generate Allure HTML
+      - name: Generate Allure HTML
+        run: |
+          allure generate report/allure-results -o report/allure-report --clean
+
+      # 6️⃣ Copy custom dashboard index.html
       - name: Copy custom dashboard
-        run: |
-          git fetch origin main
-          git checkout origin/main -- .github/scripts/index.html
-          cp .github/scripts/index.html .
+        run: cp .github/scripts/index.html .
 
-      # 5️⃣ Regenerate dashboard JSON (optional, kung meron kang generate-dashboard.js)
-      - name: Regenerate dashboard JSON
-        env:
-          GENERATE_JSON: ${{ secrets.GENERATE_JSON }}
-        run: |
-          if [ "$GENERATE_JSON" = "true" ]; then
-          curl -fsSL \
-          https://raw.githubusercontent.com/${{ github.repository }}/main/.github/scripts/generate-dashboard.js \
-          -o generate-dashboard.js
-          node generate-dashboard.js
-          else
-          echo "Skipping dashboard generation"
-          fi
-
-      # 6️⃣ Commit and push all changes to gh-pages
+      # 7️⃣ Commit and push all changes to gh-pages
       - name: Commit and push
         timeout-minutes: 3
         run: |
@@ -77,7 +72,7 @@ jobs:
           git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
           git push
 
-      # 7️⃣ Annotate workflow with GitHub Pages URL
+      # 8️⃣ Annotate workflow with GitHub Pages URL
       - name: Annotate workflow with dashboard URL
         run: |
           echo "::notice title=📋 Playwright Dashboard::https://${{ github.repository_owner }}.github.io/${{ github.repository }}/"
