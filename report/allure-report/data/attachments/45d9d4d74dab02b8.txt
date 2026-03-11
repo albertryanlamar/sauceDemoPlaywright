@@ -1,0 +1,6 @@
+Before all tests
+Executing step 1: Login_invalidUsername
+Executing step: Login_invalidUsername
+This is a login step.
+Params in Login not specified
+End of steps reached!
