@@ -9,6 +9,7 @@ on:
 defaults:
   run:
     shell: bash
+
 permissions:
   actions: read
   contents: write  # para makapag-push sa gh-pages
@@ -18,27 +19,25 @@ jobs:
     name: Publish Report to GitHub Pages
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     env:
       REPORT_PATH: reports/${{ github.event.workflow_run.head_branch }}/${{ github.event.workflow_run.id }}
 
     steps:
+      # 1️⃣ Checkout gh-pages branch
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
 
+      # 2️⃣ Configure git user
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Fetch dashboard script
-        run: |
-          curl -fsSL \
-          "https://raw.githubusercontent.com/albertryanlamar/sauceDemoPlaywright/${{ github.event.workflow_run.head_sha }}/.github/scripts/generate-dashboard.js" \
-          -o generate-dashboard.js
-
+      # 3️⃣ Download reports artifact
       - name: Download reports artifact
         uses: actions/download-artifact@v4
         with:
@@ -47,29 +46,36 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Regenerate dashboard
-        env:
-          BRANCH: ${{ github.event.workflow_run.head_branch }}
-          RUN_ID: ${{ github.event.workflow_run.id }}
-          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          REPORT_PATH: ${{ env.REPORT_PATH }}
-          KEEP_RUNS: 10
-          KEEP_FAILED_RUNS: 30
+      # 4️⃣ Copy custom dashboard HTML from main repo
+      - name: Copy custom dashboard
         run: |
-          node generate-dashboard.js
+          cp .github/html/index.html index.html
 
+      # 5️⃣ Regenerate dashboard JSON (optional, kung meron kang generate-dashboard.js)
+      - name: Regenerate dashboard JSON
+        env:
+          GENERATE_JSON: ${{ secrets.GENERATE_JSON }}
+        run: |
+          if [ "$GENERATE_JSON" = "true" ]; then
+          curl -fsSL \
+          https://raw.githubusercontent.com/${{ github.repository }}/main/.github/scripts/generate-dashboard.js \
+          -o generate-dashboard.js
+          node generate-dashboard.js
+          else
+          echo "Skipping dashboard generation"
+          fi
+
+      # 6️⃣ Commit and push all changes to gh-pages
       - name: Commit and push
         timeout-minutes: 3
         run: |
-          git add index.html tests.html dashboard.json reports/
-          [ -d failure-archive ] && git add failure-archive/ || true
-          [ -d test-runs ] && git add test-runs/ || true
-          git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}"
+          git add index.html reports/
+          [ -d tests.html ] && git add tests.html || true
+          [ -d dashboard.json ] && git add dashboard.json || true
+          git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
+          git push
 
-          until git push; do
-            git pull --rebase || { echo "Rebase failed. Manual review required."; exit 1; }
-          done
-
+      # 7️⃣ Annotate workflow with GitHub Pages URL
       - name: Annotate workflow with dashboard URL
         run: |
-          echo "::notice title=📋 Playwright Dashboard::https://albertryanlamar.github.io/sauceDemoPlaywright/"
+          echo "::notice title=📋 Playwright Dashboard::https://${{ github.repository_owner }}.github.io/${{ github.repository }}/"

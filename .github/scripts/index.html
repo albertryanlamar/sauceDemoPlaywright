@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Playwright Reports Dashboard</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f4f4f4; }
+    h1 { color: #222; }
+    .run-card { background: #fff; padding: 1rem; margin: 1rem 0; border-radius: 8px; box-shadow: 0 0 5px #ccc; }
+    .run-card a { margin-right: 1rem; text-decoration: none; color: #007bff; }
+    .run-card a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Playwright Reports Dashboard</h1>
+  <div id="run-history">
+    Loading run history...
+  </div>
+
+  <script>
+    fetch('dashboard.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('run-history');
+        container.innerHTML = '';
+        data.runs.forEach(run => {
+          const div = document.createElement('div');
+          div.className = 'run-card';
+          div.innerHTML = `
+            <strong>Run ID: ${run.id}</strong> - Status: ${run.status}<br>
+            <a href="report/html-report/index.html" target="_blank">Playwright HTML</a>
+            <a href="report/allure-report/index.html" target="_blank">Allure Report</a>
+            <a href="report/junit-report/junit.xml" target="_blank">JUnit Report</a>
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(err => {
+        document.getElementById('run-history').innerText = 'Failed to load dashboard.json';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
