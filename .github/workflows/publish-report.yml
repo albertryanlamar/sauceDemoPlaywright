@@ -46,14 +46,12 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 4️⃣ Install Allure CLI
+      # Install Allure
       - name: Install Allure CLI
         run: |
-          sudo apt-add-repository ppa:qameta/allure -y
-          sudo apt-get update
-          sudo apt-get install allure -y
+          npm install -g allure-commandline --save-dev
 
-      # 5️⃣ Generate Allure HTML
+    # Generate Allure HTML
       - name: Generate Allure HTML
         run: |
           allure generate report/allure-results -o report/allure-report --clean
