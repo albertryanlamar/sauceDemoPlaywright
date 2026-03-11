@@ -46,9 +46,11 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 4️⃣ Copy custom dashboard HTML from main repo
+      # 4️⃣ Copy custom dashboard HTML from main branch
       - name: Copy custom dashboard
         run: |
+          git fetch origin main
+          git checkout origin/main -- .github/scripts/index.html
           cp .github/scripts/index.html .
 
       # 5️⃣ Regenerate dashboard JSON (optional, kung meron kang generate-dashboard.js)
@@ -70,8 +72,8 @@ jobs:
         timeout-minutes: 3
         run: |
           git add index.html reports/
-          [ -d tests.html ] && git add tests.html || true
-          [ -d dashboard.json ] && git add dashboard.json || true
+          [ -f tests.html ] && git add tests.html || true
+          [ -f dashboard.json ] && git add dashboard.json || true
           git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
           git push
 
