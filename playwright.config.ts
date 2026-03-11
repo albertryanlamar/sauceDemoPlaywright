@@ -44,7 +44,7 @@ export default defineConfig({
   reporter:      [ 
        ['junit',{outputFile:'report/junit-report/junit.xml'}],
        ['html',{open:'never',outputFolder:'report/html-report'}],
-       ["json", { outputFile: "report/json-report/report.json" }],
+       ["json", { outputFile: "report/json-report/test-results.json" }],
        ['allure-playwright',{ resultsDir: 'report/allure-results' }],
        //[reportPortal.default, { configFile: './reportPortal.config.js' }] // ✅ RP integration,
     ],
