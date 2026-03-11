@@ -1,0 +1,17 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="6.523168">
+<testsuite name="e2e\e2e.spec.ts" timestamp="2026-03-09T09:34:14.516Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.854" errors="0">
+<testcase name="E2E Test Suite › Invalid Login" classname="e2e\e2e.spec.ts" time="1.854">
+<system-out>
+<![CDATA[Before all tests
+Executing step 1: Login_invalidUsername
+Executing step: Login_invalidUsername
+This is a login step.
+Attempting Login with invalidUsername
+End of steps reached!
+
+[[ATTACHMENT|..\..\test-results\e2e-e2e-E2E-Test-Suite-Invalid-Login-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
