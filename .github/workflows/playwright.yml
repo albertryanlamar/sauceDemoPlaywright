@@ -87,4 +87,4 @@ jobs:
         name: reports
         path: ${{ github.workspace }}/report/
         if-no-files-found: warn
-        retention-days: 30
+        retention-days: 60
