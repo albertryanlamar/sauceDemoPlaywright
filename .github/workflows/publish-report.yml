@@ -79,11 +79,11 @@ jobs:
           BRANCH: ${{ github.event.workflow_run.head_branch }}
           RUN_ID: ${{ github.event.workflow_run.id }}
           CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          REPORT_PATH: ${{ env.REPORT_PATH }}
+          REPORT_PATH: report/report-json
           KEEP_RUNS: 10
           KEEP_FAILED_RUNS: 30
         run: |
-          node generate-dashboard.js    
+          node generate-dashboard.js  
 
       # Copy custom dashboard
       - name: Copy custom dashboard
