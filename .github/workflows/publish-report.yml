@@ -36,8 +36,18 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      # 3️⃣ Download reports artifact
+      # 🟢 Selective cleanup (walang last-updated.txt)
+      - name: Clean old reports only
+        run: |
+          echo "=== Removing old report directories ==="
+          # Remove specific folders
+          rm -rf ./html-report
+          rm -rf ./allure-report
+          rm -rf ./junit-report
+          rm -rf ./json-report
+          echo "✅ Old reports removed"
+          
+     # 3️⃣ Download reports artifact
       - name: Download reports artifact
         uses: actions/download-artifact@v4
         with:
