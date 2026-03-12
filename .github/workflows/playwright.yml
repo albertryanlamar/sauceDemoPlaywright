@@ -54,7 +54,7 @@ jobs:
     # Run tests inside Docker container
     - name: Run Playwright tests in Docker
       run: |
-        echo "🚀 Running tests..."
+        echo "🚀 Running tests.."
         docker run \
         -v ${{ github.workspace }}/report:/usr/src/app/report \
         playwright-tests
