@@ -17,72 +17,61 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 🧹 SETUP REPORT DIRECTORIES
-    - name: Setup report directories
+    # 🧹 CLEAN SLATE - BUONG REPORT FOLDER BAGO MAG-TEST
+    - name: Clean everything before tests
       run: |
-        echo "🧹 Setting up fresh report directories..."
-        
-        # Create main report folder
-        mkdir -p ${{ github.workspace }}/report
-        
-        # Delete and recreate all report subfolders
-        rm -rf ${{ github.workspace }}/report/html-report
-        rm -rf ${{ github.workspace }}/report/allure-report
-        rm -rf ${{ github.workspace }}/report/json-report
-        rm -rf ${{ github.workspace }}/report/junit-report
-        rm -rf ${{ github.workspace }}/report/allure-results
-        
-        # Create fresh folders
-        mkdir -p ${{ github.workspace }}/report/html-report
-        mkdir -p ${{ github.workspace }}/report/allure-report
-        mkdir -p ${{ github.workspace }}/report/json-report
-        mkdir -p ${{ github.workspace }}/report/junit-report
+        echo "🧹 COMPLETE CLEANUP..."
+        rm -rf ${{ github.workspace }}/report/
         mkdir -p ${{ github.workspace }}/report/allure-results
-        
-        # Set permissions
+        mkdir -p ${{ github.workspace }}/report/html-report
+        mkdir -p ${{ github.workspace }}/report/junit-report
+        mkdir -p ${{ github.workspace }}/report/json-report
         chmod -R 777 ${{ github.workspace }}/report/
-        
-        echo "✅ Report directories ready"
-        echo ""
-        echo "=== Verification ==="
-        ls -la ${{ github.workspace }}/report/
+        echo "✅ Clean slate ready"
 
     # Build Docker image
     - name: Build Docker Image
       run: docker build -t playwright-tests .
-    
-    # Run tests inside Docker container
-    - name: Run Playwright tests in Docker
+
+    # 🔍 DEBUG: Check allure-playwright installation
+    - name: Verify allure-playwright in Docker
       run: |
-        echo "🚀 Running tests.."
+        docker run --rm playwright-tests sh -c "
+          echo '=== ALLURE-PLAYWRIGHT VERSION ==='
+          npm list allure-playwright
+          echo ''
+          echo '=== PLAYWRIGHT CONFIG ==='
+          cat playwright.config.ts | grep -A 10 reporter
+        "
+
+    # 🚀 RUN TESTS
+    - name: Run Playwright tests
+      run: |
         docker run \
         -v ${{ github.workspace }}/report:/usr/src/app/report \
         playwright-tests
-    
-    # Verify test results
+
+    # ✅ VERIFY RESULTS
     - name: Verify test results
       if: always()
       run: |
-        echo "=== Test Results Verification ==="
+        echo "=== TEST RESULTS VERIFICATION ==="
         echo ""
-        echo "📊 Allure Results (should have JSON files):"
-        ls -la ${{ github.workspace }}/report/allure-results/ || echo "No allure results"
-        echo "Count: $(find ${{ github.workspace }}/report/allure-results -name '*.json' 2>/dev/null | wc -l)"
+        echo "📊 ALLURE RESULTS:"
+        ls -la ${{ github.workspace }}/report/allure-results/ || echo "❌ No allure results"
+        echo "JSON files: $(find ${{ github.workspace }}/report/allure-results -name '*.json' 2>/dev/null | wc -l)"
         echo ""
-        echo "📈 HTML Report:"
-        ls -la ${{ github.workspace }}/report/html-report/ || echo "No HTML report"
+        echo "📈 HTML REPORT:"
+        ls -la ${{ github.workspace }}/report/html-report/ || echo "❌ No HTML report"
         echo ""
-        echo "📋 JUnit Report:"
-        ls -la ${{ github.workspace }}/report/junit-report/ || echo "No JUnit report"
-        echo ""
-        echo "🔍 JSON Report:"
-        ls -la ${{ github.workspace }}/report/json-report/ || echo "No JSON report"
+        echo "📋 JUNIT REPORT:"
+        ls -la ${{ github.workspace }}/report/junit-report/ || echo "❌ No JUnit report"
         
+    # 📦 UPLOAD ARTIFACT
     - name: Upload reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: reports
-        path: ${{ github.workspace }}/report/  # ← GINAMIT KO RIN ANG FULL PATH
-        if-no-files-found: warn
+        path: ${{ github.workspace }}/report/
         retention-days: 60
