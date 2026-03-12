@@ -25,12 +25,17 @@ jobs:
     # Build Docker image
     - name: Build Docker Image
       run: docker build -t playwright-tests .
-
-    # Run tests inside Docker container
+    
+      # Check reports folder
+    - name: Check reports folder
+      run: |
+        ls -R report
+    
+      # Run tests inside Docker container
     - name: Run Playwright tests in Docker
       run: |
         docker run \
-        -v ${{ github.workspace }}/report:/app/report \
+        -v ${{ github.workspace }}/report:/usr/src/app/report \
         playwright-tests
         
     - name: Upload reports
