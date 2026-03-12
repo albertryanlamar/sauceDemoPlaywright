@@ -16,11 +16,35 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-      
-    # 2️⃣ Create report folders so JSON and HTML have a place
-    - name: Create report folders
+
+    # 🧹 CLEAN AND CREATE REPORT FOLDERS (isang step na lang)
+    - name: Setup report directories
       run: |
-        mkdir -p report/html-report report/allure-report report/json-report report/allure-results
+        echo "🧹 Setting up fresh report directories..."
+        # Create main report folder
+        mkdir -p ${{ github.workspace }}/report
+        
+        # Delete and recreate all report subfolders
+        rm -rf ${{ github.workspace }}/report/html-report
+        rm -rf ${{ github.workspace }}/report/allure-report
+        rm -rf ${{ github.workspace }}/report/json-report
+        rm -rf ${{ github.workspace }}/report/junit-report
+        rm -rf ${{ github.workspace }}/report/allure-results
+        
+        # Create fresh folders
+        mkdir -p ${{ github.workspace }}/report/html-report
+        mkdir -p ${{ github.workspace }}/report/allure-report
+        mkdir -p ${{ github.workspace }}/report/json-report
+        mkdir -p ${{ github.workspace }}/report/junit-report
+        mkdir -p ${{ github.workspace }}/report/allure-results
+        
+        # Set permissions
+        chmod -R 777 ${{ github.workspace }}/report/
+        
+        echo "✅ Report directories ready"
+        echo ""
+        echo "=== Verification ==="
+        ls -la ${{ github.workspace }}/report/
 
     # Build Docker image
     - name: Build Docker Image
