@@ -76,21 +76,16 @@ jobs:
       - name: Update timestamp
         run: |
           echo "Last updated: $(date)" > last-updated.txt
-
-      # Commit and push
+        
+        # Commit and push all changes to gh-pages
       - name: Commit and push
         timeout-minutes: 3
         run: |
-          # I-add lahat ng bago
-          git add .
-          
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "ci: Update report for run ${{ github.event.workflow_run.id }}"
-            git push
-            echo "✅ Changes pushed to gh-pages"
-          fi
+          git add index.html report/
+          [ -f tests.html ] && git add tests.html || true
+          [ -f dashboard.json ] && git add dashboard.json || true
+          git commit -m "ci: Update report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
+          git push
 
       # Annotate workflow
       - name: Annotate workflow
