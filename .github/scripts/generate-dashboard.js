@@ -1463,7 +1463,7 @@ function generateDashboard(history, failureArchive) {
 </body>
 </html>`;
 
-  fs.writeFileSync("index.html", html);
+  fs.writeFileSync("dashboard.html", html);
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────

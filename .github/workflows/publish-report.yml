@@ -87,7 +87,7 @@ jobs:
 
       # Copy custom dashboard
       - name: Copy custom dashboard
-        run: cp .github/scripts/index.html . || echo "No custom dashboard"
+        run: cp .github/scripts/page.html . || echo "No custom dashboard"
       
       # Update timestamp
       - name: Update timestamp
@@ -100,7 +100,7 @@ jobs:
         timeout-minutes: 3
         run: |
           git add index.html report/
-          [ -f tests.html ] && git add tests.html || true
+          [ -f dashboard.html ] && git add tests.html || true
           [ -f dashboard.json ] && git add dashboard.json || true
           git commit -m "ci: Update report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
           git push
