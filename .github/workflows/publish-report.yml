@@ -77,7 +77,8 @@ jobs:
         run: |
           echo "Last updated: $(date)" > last-updated.txt
         
-        # Commit and push all changes to gh-pages
+      # ✅ ITO AY DAPAT NASA LABAS NG UPDATE TIMESTAMP STEP
+      # Commit and push all changes to gh-pages
       - name: Commit and push
         timeout-minutes: 3
         run: |
