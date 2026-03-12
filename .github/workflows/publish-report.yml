@@ -74,7 +74,8 @@ jobs:
       
       # Update timestamp
       - name: Update timestamp
-        run: echo "Last updated: $(date)" > last-updated.txt
+        run: |
+          echo "Last updated: $(date)" > last-updated.txt
 
       # Commit and push
       - name: Commit and push
