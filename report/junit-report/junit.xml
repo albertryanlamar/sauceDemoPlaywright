@@ -1,9 +1,35 @@
-<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="5.24333">
-<testsuite name="e2e/e2e.spec.ts" timestamp="2026-03-12T01:50:55.863Z" hostname="chromium" tests="2" failures="0" skipped="0" time="3.393" errors="0">
-<testcase name="E2E Test Suite › Purchase 2 item" classname="e2e/e2e.spec.ts" time="2.529">
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="8.202172">
+<testsuite name="e2e/e2e.spec.ts" timestamp="2026-03-12T01:58:18.244Z" hostname="chromium" tests="3" failures="0" skipped="0" time="6.296" errors="0">
+<testcase name="E2E Test Suite › Purchase Item" classname="e2e/e2e.spec.ts" time="2.656">
 <system-out>
 <![CDATA[Before all tests
 Executing step 1: Login_valid
+Executing step: Login_valid
+This is a login step.
+Attempting login with username: standard_user
+Executing step 2: AddToCart_Sauce Labs Backpack
+Executing step: AddToCart_Sauce Labs Backpack
+This is an add to cart step.
+This is an add to cart step. [ [32m'Sauce Labs Backpack'[39m ]
+Executing step 3: viewCart
+Executing step: viewCart
+This is a view cart step. [ [32m'Sauce Labs Backpack'[39m ]
+Checking in the cart item:Sauce Labs Backpack
+Executing step 4: checkout_Albert_Lamar_1630
+Executing step: checkout_Albert_Lamar_1630
+Executing step 5: Logout
+Executing step: Logout
+This is a logout step.
+Attempting logout with username: standard_user
+End of steps reached!
+
+[[ATTACHMENT|../../test-results/e2e-e2e-E2E-Test-Suite-Purchase-Item-chromium/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="E2E Test Suite › Purchase 2 item" classname="e2e/e2e.spec.ts" time="2.557">
+<system-out>
+<![CDATA[Executing step 1: Login_valid
 Executing step: Login_valid
 This is a login step.
 Attempting login with username: standard_user
@@ -18,7 +44,7 @@ Checking in the cart item:Sauce Labs Bike Light
 Checking in the cart item:Sauce Labs Backpack
 Executing step 4: checkout
 Executing step: checkout
-[ [32m'Demetrius'[39m, [32m'Abernathy'[39m, [32m'68098'[39m ]
+[ [32m'Gordon'[39m, [32m'Keeling'[39m, [32m'91584'[39m ]
 Executing step 5: Logout
 Executing step: Logout
 This is a logout step.
@@ -29,7 +55,7 @@ End of steps reached!
 ]]>
 </system-out>
 </testcase>
-<testcase name="E2E Test Suite › Invalid Login" classname="e2e/e2e.spec.ts" time="0.864">
+<testcase name="E2E Test Suite › Invalid Login" classname="e2e/e2e.spec.ts" time="1.083">
 <system-out>
 <![CDATA[Before all tests
 Executing step 1: Login_invalidUsername

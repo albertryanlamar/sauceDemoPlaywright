@@ -1,5 +1,5 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","8661","Purchase Item","chromium","2026-03-09","passed","2026-03-09","E2E Test Suite","e2e\e2e.spec.ts","",""
-"","2529","Purchase 2 item","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
-"","864","Invalid Login","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
+"","1083","Invalid Login","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
 "","5847","Login and Logout","chromium","2026-03-09","passed","2026-03-09","E2E Test Suite","e2e\e2e.spec.ts","",""
+"","2656","Purchase Item","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
+"","2557","Purchase 2 item","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
