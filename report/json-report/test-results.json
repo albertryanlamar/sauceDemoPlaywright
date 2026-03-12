@@ -1,0 +1,418 @@
+{
+  "config": {
+    "configFile": "/usr/src/app/playwright.config.ts",
+    "rootDir": "/usr/src/app/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/usr/src/app/test-results",
+        "repeatEach": 1,
+        "retries": 3,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/usr/src/app/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "junit",
+        {
+          "outputFile": "report/junit-report/junit.xml"
+        }
+      ],
+      [
+        "html",
+        {
+          "open": "never",
+          "outputFolder": "report/html-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "report/json-report/test-results.json"
+        }
+      ],
+      [
+        "/usr/src/app/node_modules/allure-playwright/dist/cjs/index.js",
+        {
+          "resultsDir": "report/allure-results"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "e2e/e2e.spec.ts",
+      "file": "e2e/e2e.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "E2E Test Suite",
+          "file": "e2e/e2e.spec.ts",
+          "line": 18,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Purchase Item",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2702,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Before all tests\n"
+                        },
+                        {
+                          "text": "Executing step 1: Login_valid\n"
+                        },
+                        {
+                          "text": "Executing step: Login_valid\n"
+                        },
+                        {
+                          "text": "This is a login step.\n"
+                        },
+                        {
+                          "text": "Attempting login with username: standard_user\n"
+                        },
+                        {
+                          "text": "Executing step 2: AddToCart_Sauce Labs Backpack\n"
+                        },
+                        {
+                          "text": "Executing step: AddToCart_Sauce Labs Backpack\n"
+                        },
+                        {
+                          "text": "This is an add to cart step.\n"
+                        },
+                        {
+                          "text": "This is an add to cart step. [ \u001b[32m'Sauce Labs Backpack'\u001b[39m ]\n"
+                        },
+                        {
+                          "text": "Executing step 3: viewCart\n"
+                        },
+                        {
+                          "text": "Executing step: viewCart\n"
+                        },
+                        {
+                          "text": "This is a view cart step. [ \u001b[32m'Sauce Labs Backpack'\u001b[39m ]\n"
+                        },
+                        {
+                          "text": "Checking in the cart item:Sauce Labs Backpack\n"
+                        },
+                        {
+                          "text": "Executing step 4: checkout_Albert_Lamar_1630\n"
+                        },
+                        {
+                          "text": "Executing step: checkout_Albert_Lamar_1630\n"
+                        },
+                        {
+                          "text": "Executing step 5: Logout\n"
+                        },
+                        {
+                          "text": "Executing step: Logout\n"
+                        },
+                        {
+                          "text": "This is a logout step.\n"
+                        },
+                        {
+                          "text": "Attempting logout with username: standard_user\n"
+                        },
+                        {
+                          "text": "End of steps reached!\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Step 1: Login_valid",
+                          "duration": 919
+                        },
+                        {
+                          "title": "Step 2: AddToCart_Sauce Labs Backpack",
+                          "duration": 111
+                        },
+                        {
+                          "title": "Step 3: viewCart",
+                          "duration": 138
+                        },
+                        {
+                          "title": "Step 4: checkout_Albert_Lamar_1630",
+                          "duration": 349
+                        },
+                        {
+                          "title": "Step 5: Logout",
+                          "duration": 1073
+                        }
+                      ],
+                      "startTime": "2026-03-12T05:53:44.223Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/usr/src/app/test-results/e2e-e2e-E2E-Test-Suite-Purchase-Item-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2273f457eefe02023f08-b6d2f5462f1fa51a901e",
+              "file": "e2e/e2e.spec.ts",
+              "line": 22,
+              "column": 9
+            },
+            {
+              "title": "Purchase 2 item",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2097,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Executing step 1: Login_valid\n"
+                        },
+                        {
+                          "text": "Executing step: Login_valid\n"
+                        },
+                        {
+                          "text": "This is a login step.\n"
+                        },
+                        {
+                          "text": "Attempting login with username: standard_user\n"
+                        },
+                        {
+                          "text": "Executing step 2: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack\n"
+                        },
+                        {
+                          "text": "Executing step: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack\n"
+                        },
+                        {
+                          "text": "This is an add to cart step.\n"
+                        },
+                        {
+                          "text": "This is an add to cart step. [ \u001b[32m'Sauce Labs Bike Light'\u001b[39m, \u001b[32m'Sauce Labs Backpack'\u001b[39m ]\n"
+                        },
+                        {
+                          "text": "Executing step 3: viewCart\n"
+                        },
+                        {
+                          "text": "Executing step: viewCart\n"
+                        },
+                        {
+                          "text": "This is a view cart step. [ \u001b[32m'Sauce Labs Bike Light'\u001b[39m, \u001b[32m'Sauce Labs Backpack'\u001b[39m ]\n"
+                        },
+                        {
+                          "text": "Checking in the cart item:Sauce Labs Bike Light\n"
+                        },
+                        {
+                          "text": "Checking in the cart item:Sauce Labs Backpack\n"
+                        },
+                        {
+                          "text": "Executing step 4: checkout\n"
+                        },
+                        {
+                          "text": "Executing step: checkout\n"
+                        },
+                        {
+                          "text": "[ \u001b[32m'Barrett'\u001b[39m, \u001b[32m'Raynor'\u001b[39m, \u001b[32m'95293-4545'\u001b[39m ]\n"
+                        },
+                        {
+                          "text": "Executing step 5: Logout\n"
+                        },
+                        {
+                          "text": "Executing step: Logout\n"
+                        },
+                        {
+                          "text": "This is a logout step.\n"
+                        },
+                        {
+                          "text": "Attempting logout with username: standard_user\n"
+                        },
+                        {
+                          "text": "End of steps reached!\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Step 1: Login_valid",
+                          "duration": 522
+                        },
+                        {
+                          "title": "Step 2: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack",
+                          "duration": 132
+                        },
+                        {
+                          "title": "Step 3: viewCart",
+                          "duration": 86
+                        },
+                        {
+                          "title": "Step 4: checkout",
+                          "duration": 241
+                        },
+                        {
+                          "title": "Step 5: Logout",
+                          "duration": 1075
+                        }
+                      ],
+                      "startTime": "2026-03-12T05:53:47.408Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/usr/src/app/test-results/e2e-e2e-E2E-Test-Suite-Purchase-2-item-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2273f457eefe02023f08-365fe1e053c40354be33",
+              "file": "e2e/e2e.spec.ts",
+              "line": 22,
+              "column": 9
+            },
+            {
+              "title": "Invalid Login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 967,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Before all tests\n"
+                        },
+                        {
+                          "text": "Executing step 1: Login_invalidUsername\n"
+                        },
+                        {
+                          "text": "Executing step: Login_invalidUsername\n"
+                        },
+                        {
+                          "text": "This is a login step.\n"
+                        },
+                        {
+                          "text": "Attempting Login with invalidUsername\n"
+                        },
+                        {
+                          "text": "End of steps reached!\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Step 1: Login_invalidUsername",
+                          "duration": 852
+                        }
+                      ],
+                      "startTime": "2026-03-12T05:53:44.195Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/usr/src/app/test-results/e2e-e2e-E2E-Test-Suite-Invalid-Login-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2273f457eefe02023f08-03bdf70948f2c7e0665f",
+              "file": "e2e/e2e.spec.ts",
+              "line": 22,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-12T05:53:41.968Z",
+    "duration": 8026.589999999999,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

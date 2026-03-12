@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2097","Purchase 2 item","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
+"","2702","Purchase Item","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
+"","967","Invalid Login","chromium","2026-03-12","passed","2026-03-12","E2E Test Suite","e2e/e2e.spec.ts","",""
