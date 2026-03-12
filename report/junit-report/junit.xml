@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="8.202172">
-<testsuite name="e2e/e2e.spec.ts" timestamp="2026-03-12T01:58:18.244Z" hostname="chromium" tests="3" failures="0" skipped="0" time="6.296" errors="0">
-<testcase name="E2E Test Suite › Purchase Item" classname="e2e/e2e.spec.ts" time="2.656">
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="8.116356">
+<testsuite name="e2e/e2e.spec.ts" timestamp="2026-03-12T02:23:43.991Z" hostname="chromium" tests="3" failures="0" skipped="0" time="5.825" errors="0">
+<testcase name="E2E Test Suite › Purchase Item" classname="e2e/e2e.spec.ts" time="2.658">
 <system-out>
 <![CDATA[Before all tests
 Executing step 1: Login_valid
@@ -27,7 +27,7 @@ End of steps reached!
 ]]>
 </system-out>
 </testcase>
-<testcase name="E2E Test Suite › Purchase 2 item" classname="e2e/e2e.spec.ts" time="2.557">
+<testcase name="E2E Test Suite › Purchase 2 item" classname="e2e/e2e.spec.ts" time="2.176">
 <system-out>
 <![CDATA[Executing step 1: Login_valid
 Executing step: Login_valid
@@ -44,7 +44,7 @@ Checking in the cart item:Sauce Labs Bike Light
 Checking in the cart item:Sauce Labs Backpack
 Executing step 4: checkout
 Executing step: checkout
-[ [32m'Gordon'[39m, [32m'Keeling'[39m, [32m'91584'[39m ]
+[ [32m'Faye'[39m, [32m'Breitenberg'[39m, [32m'70377-6066'[39m ]
 Executing step 5: Logout
 Executing step: Logout
 This is a logout step.
@@ -55,7 +55,7 @@ End of steps reached!
 ]]>
 </system-out>
 </testcase>
-<testcase name="E2E Test Suite › Invalid Login" classname="e2e/e2e.spec.ts" time="1.083">
+<testcase name="E2E Test Suite › Invalid Login" classname="e2e/e2e.spec.ts" time="0.991">
 <system-out>
 <![CDATA[Before all tests
 Executing step 1: Login_invalidUsername
