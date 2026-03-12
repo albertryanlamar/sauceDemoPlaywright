@@ -12,7 +12,7 @@ defaults:
 
 permissions:
   actions: read
-  contents: write  # para makapag-push sa gh-pages
+  contents: write
 
 jobs:
   publish_report:
@@ -25,19 +25,19 @@ jobs:
       REPORT_PATH: reports/${{ github.event.workflow_run.head_branch }}/${{ github.event.workflow_run.id }}
 
     steps:
-      # 1️⃣ Checkout gh-pages branch
+      # Checkout gh-pages branch
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
 
-      # 2️⃣ Configure git user
+      # Configure git user
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
      
-      # 3️⃣ Download reports artifact (UNAHIN NATIN ITO)
+      # Download reports artifact
       - name: Download reports artifact
         uses: actions/download-artifact@v4
         with:
@@ -46,47 +46,54 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 4️⃣ Clean old reports (PAGKATAPOS NG DOWNLOAD)
-      - name: Clean old reports only
+      # 🗑️ BURAHIN ANG BUONG REPORT FOLDER (para sigurado)
+      - name: Delete old report folder
         run: |
-          echo "=== Removing old report directories ==="
-          # Remove specific folders
-          rm -rf ./html-report
-          rm -rf ./allure-report
-          rm -rf ./junit-report
-          rm -rf ./json-report
-          echo "✅ Old reports removed"
+          echo "🗑️ Deleting old report folder..."
+          rm -rf ./report
+          echo "✅ Old report deleted"
+          
+          # Gumawa ng bagong report folder
+          mkdir -p ./report
+          echo "✅ Fresh report folder created"
 
-      # 5️⃣ Install Allure
+      # Install Allure
       - name: Install Allure CLI
-        run: |
-          npm install -g allure-commandline --save-dev
+        run: npm install -g allure-commandline --save-dev
 
-      # 6️⃣ Generate Allure HTML
+      # Generate Allure HTML (gamit ang bagong download)
       - name: Generate Allure HTML
         run: |
+          echo "📊 Generating Allure report..."
           allure generate report/allure-results -o report/allure-report --clean
+          echo "✅ Allure report generated"
 
-      # 7️⃣ Copy custom dashboard index.html
+      # Copy custom dashboard
       - name: Copy custom dashboard
-        run: cp .github/scripts/index.html .
+        run: cp .github/scripts/index.html . || echo "No custom dashboard"
       
-      # 8️⃣ Force change para laging may commit
+      # Update timestamp
       - name: Update timestamp
-        run: |
-          echo "Last updated: $(date)" > last-updated.txt
+        run: echo "Last updated: $(date)" > last-updated.txt
 
-      # 9️⃣ Commit and push all changes to gh-pages
+      # Commit and push
       - name: Commit and push
         timeout-minutes: 3
         run: |
-          git add index.html report/
-          [ -f tests.html ] && git add tests.html || true
-          [ -f dashboard.json ] && git add dashboard.json || true
-          git commit -m "ci: Update report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
-          git push
+          # I-add lahat ng bago
+          git add .
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "ci: Update report for run ${{ github.event.workflow_run.id }}"
+            git push
+            echo "✅ Changes pushed to gh-pages"
+          fi
 
-      # 🔟 Annotate workflow with GitHub Pages URL
-      - name: Annotate workflow with dashboard URL
+      # Annotate workflow
+      - name: Annotate workflow
         run: |
-          echo "::notice title=📋 Playwright Dashboard::https://${{ github.repository_owner }}.github.io/${{ github.repository }}/"
+          REPO_NAME="${{ github.repository }}"
+          REPO_NAME=${REPO_NAME##*/}
+          echo "::notice title=📋 Playwright Dashboard::https://${{ github.repository_owner }}.github.io/$REPO_NAME/"
