@@ -103,7 +103,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2658,
+                      "duration": 2369,
                       "errors": [],
                       "stdout": [
                         {
@@ -172,26 +172,26 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_valid",
-                          "duration": 826
+                          "duration": 749
                         },
                         {
                           "title": "Step 2: AddToCart_Sauce Labs Backpack",
-                          "duration": 104
+                          "duration": 98
                         },
                         {
                           "title": "Step 3: viewCart",
-                          "duration": 190
+                          "duration": 139
                         },
                         {
                           "title": "Step 4: checkout_Albert_Lamar_1630",
-                          "duration": 341
+                          "duration": 322
                         },
                         {
                           "title": "Step 5: Logout",
-                          "duration": 1067
+                          "duration": 985
                         }
                       ],
-                      "startTime": "2026-03-12T02:23:45.599Z",
+                      "startTime": "2026-03-12T02:37:47.556Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -226,7 +226,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2176,
+                      "duration": 2107,
                       "errors": [],
                       "stdout": [
                         {
@@ -275,7 +275,7 @@
                           "text": "Executing step: checkout\n"
                         },
                         {
-                          "text": "[ \u001b[32m'Faye'\u001b[39m, \u001b[32m'Breitenberg'\u001b[39m, \u001b[32m'70377-6066'\u001b[39m ]\n"
+                          "text": "[ \u001b[32m'Billy'\u001b[39m, \u001b[32m'Hyatt'\u001b[39m, \u001b[32m'35962'\u001b[39m ]\n"
                         },
                         {
                           "text": "Executing step 5: Logout\n"
@@ -298,26 +298,26 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_valid",
-                          "duration": 650
+                          "duration": 565
                         },
                         {
                           "title": "Step 2: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack",
-                          "duration": 125
+                          "duration": 114
                         },
                         {
                           "title": "Step 3: viewCart",
-                          "duration": 91
+                          "duration": 85
                         },
                         {
                           "title": "Step 4: checkout",
-                          "duration": 296
+                          "duration": 229
                         },
                         {
                           "title": "Step 5: Logout",
-                          "duration": 973
+                          "duration": 1078
                         }
                       ],
-                      "startTime": "2026-03-12T02:23:48.768Z",
+                      "startTime": "2026-03-12T02:37:50.384Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -352,7 +352,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 991,
+                      "duration": 1016,
                       "errors": [],
                       "stdout": [
                         {
@@ -379,10 +379,10 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_invalidUsername",
-                          "duration": 875
+                          "duration": 932
                         }
                       ],
-                      "startTime": "2026-03-12T02:23:45.597Z",
+                      "startTime": "2026-03-12T02:37:47.571Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -408,8 +408,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-12T02:23:43.327Z",
-    "duration": 8116.356,
+    "startTime": "2026-03-12T02:37:45.470Z",
+    "duration": 7438.188000000001,
     "expected": 3,
     "skipped": 0,
     "unexpected": 0,
