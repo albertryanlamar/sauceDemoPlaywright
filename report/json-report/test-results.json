@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "C:\\Users\\User\\Documents\\AutomationStudy\\saucedemoPlaywright\\playwright.config.ts",
-    "rootDir": "C:/Users/User/Documents/AutomationStudy/saucedemoPlaywright/tests",
+    "configFile": "/usr/src/app/playwright.config.ts",
+    "rootDir": "/usr/src/app/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -16,7 +16,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "C:/Users/User/Documents/AutomationStudy/saucedemoPlaywright/test-results",
+        "outputDir": "/usr/src/app/test-results",
         "repeatEach": 1,
         "retries": 3,
         "metadata": {
@@ -24,7 +24,7 @@
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "C:/Users/User/Documents/AutomationStudy/saucedemoPlaywright/tests",
+        "testDir": "/usr/src/app/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -54,7 +54,7 @@
         }
       ],
       [
-        "C:\\Users\\User\\Documents\\AutomationStudy\\saucedemoPlaywright\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        "/usr/src/app/node_modules/allure-playwright/dist/cjs/index.js",
         {
           "resultsDir": "report/allure-results"
         }
@@ -70,12 +70,12 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.58.2",
-    "workers": 4,
+    "workers": 2,
     "webServer": null
   },
   "suites": [
     {
-      "title": "e2e\\e2e.spec.ts",
+      "title": "e2e/e2e.spec.ts",
       "file": "e2e/e2e.spec.ts",
       "column": 0,
       "line": 0,
@@ -103,7 +103,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7197,
+                      "duration": 2529,
                       "errors": [],
                       "stdout": [
                         {
@@ -155,7 +155,7 @@
                           "text": "Executing step: checkout\n"
                         },
                         {
-                          "text": "[ \u001b[32m'Christina'\u001b[39m, \u001b[32m'Larson'\u001b[39m, \u001b[32m'38477-4119'\u001b[39m ]\n"
+                          "text": "[ \u001b[32m'Demetrius'\u001b[39m, \u001b[32m'Abernathy'\u001b[39m, \u001b[32m'68098'\u001b[39m ]\n"
                         },
                         {
                           "text": "Executing step 5: Logout\n"
@@ -178,32 +178,32 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_valid",
-                          "duration": 3916
+                          "duration": 785
                         },
                         {
                           "title": "Step 2: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack",
-                          "duration": 308
+                          "duration": 181
                         },
                         {
                           "title": "Step 3: viewCart",
-                          "duration": 153
+                          "duration": 136
                         },
                         {
                           "title": "Step 4: checkout",
-                          "duration": 949
+                          "duration": 270
                         },
                         {
                           "title": "Step 5: Logout",
-                          "duration": 1062
+                          "duration": 1076
                         }
                       ],
-                      "startTime": "2026-03-11T05:10:39.964Z",
+                      "startTime": "2026-03-12T01:50:57.346Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "C:\\Users\\User\\Documents\\AutomationStudy\\saucedemoPlaywright\\test-results\\e2e-e2e-E2E-Test-Suite-Purchase-2-item-chromium\\trace.zip"
+                          "path": "/usr/src/app/test-results/e2e-e2e-E2E-Test-Suite-Purchase-2-item-chromium/trace.zip"
                         }
                       ]
                     }
@@ -232,7 +232,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 4767,
+                      "duration": 864,
                       "errors": [],
                       "stdout": [
                         {
@@ -259,16 +259,16 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_invalidUsername",
-                          "duration": 3715
+                          "duration": 792
                         }
                       ],
-                      "startTime": "2026-03-11T05:10:39.995Z",
+                      "startTime": "2026-03-12T01:50:57.349Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "C:\\Users\\User\\Documents\\AutomationStudy\\saucedemoPlaywright\\test-results\\e2e-e2e-E2E-Test-Suite-Invalid-Login-chromium\\trace.zip"
+                          "path": "/usr/src/app/test-results/e2e-e2e-E2E-Test-Suite-Invalid-Login-chromium/trace.zip"
                         }
                       ]
                     }
@@ -288,8 +288,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-11T05:10:35.135Z",
-    "duration": 14634.807,
+    "startTime": "2026-03-12T01:50:55.278Z",
+    "duration": 5243.33,
     "expected": 2,
     "skipped": 0,
     "unexpected": 0,
