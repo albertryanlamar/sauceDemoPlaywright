@@ -59,6 +59,11 @@ jobs:
       # 6️⃣ Copy custom dashboard index.html
       - name: Copy custom dashboard
         run: cp .github/scripts/index.html .
+      
+      # 7️⃣ Force change para laging may commit
+      - name: Update timestamp
+        run: |
+          echo "Last updated: $(date)" > last-updated.txt
 
       # 7️⃣ Commit and push all changes to gh-pages
       - name: Commit and push
@@ -67,7 +72,7 @@ jobs:
           git add index.html report/
           [ -f tests.html ] && git add tests.html || true
           [ -f dashboard.json ] && git add dashboard.json || true
-          git commit -m "ci: add report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
+          git commit -m "ci: Update report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
           git push
 
       # 8️⃣ Annotate workflow with GitHub Pages URL
