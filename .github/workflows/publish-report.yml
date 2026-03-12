@@ -79,7 +79,7 @@ jobs:
           BRANCH: ${{ github.event.workflow_run.head_branch }}
           RUN_ID: ${{ github.event.workflow_run.id }}
           CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          REPORT_PATH: report/report-json
+          REPORT_PATH: report/json-report
           KEEP_RUNS: 10
           KEEP_FAILED_RUNS: 30
         run: |
