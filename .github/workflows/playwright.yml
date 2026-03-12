@@ -17,10 +17,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 🧹 CLEAN AND CREATE REPORT FOLDERS (isang step na lang)
+    # 🧹 SETUP REPORT DIRECTORIES (isang step lang)
     - name: Setup report directories
       run: |
         echo "🧹 Setting up fresh report directories..."
+        
         # Create main report folder
         mkdir -p ${{ github.workspace }}/report
         
@@ -50,45 +51,40 @@ jobs:
     - name: Build Docker Image
       run: docker build -t playwright-tests .
     
-      # Check reports folder
-    - name: Check reports folder
-      run: |
-        ls -R report
-    
-      # Run tests inside Docker container
+    # Run tests inside Docker container
     - name: Run Playwright tests in Docker
       run: |
+        echo "🚀 Running tests..."
         docker run \
         -v ${{ github.workspace }}/report:/usr/src/app/report \
         playwright-tests
+    
+    # Verify test results
+    - name: Verify test results
+      if: always()
+      run: |
+        echo "=== Test Results Verification ==="
+        echo ""
+        echo "📊 Allure Results (should have JSON files):"
+        ls -la ${{ github.workspace }}/report/allure-results/ || echo "No allure results"
+        echo ""
+        echo "📈 HTML Report:"
+        ls -la ${{ github.workspace }}/report/html-report/ || echo "No HTML report"
+        echo ""
+        echo "📋 JUnit Report:"
+        ls -la ${{ github.workspace }}/report/junit-report/ || echo "No JUnit report"
+        echo ""
+        echo "🔍 JSON Report:"
+        ls -la ${{ github.workspace }}/report/json-report/ || echo "No JSON report"
+        echo ""
+        echo "=== Allure Results Count ==="
+        find ${{ github.workspace }}/report/allure-results -name "*.json" 2>/dev/null | wc -l
         
     - name: Upload reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: reports
-        path: report
-   #-ok
-    #- name: Upload Allure Report Artifact
-    #  if: always()
-    #  uses: actions/upload-artifact@v4
-    #  with:
-    #    name: "allure-report"
-    #    path: "report/allure-results"
-    #    retention-days: 30
-
-    # - name: Upload Playwright HTML Report
-    #  if: always()
-    #  uses: actions/upload-artifact@v4
-    #  with:
-    #    name: playwright-report
-    #    path: report/html-report/
-    #    retention-days: 30
-
-    #- name: Upload JUnit Report
-    #  if: always()
-    #  uses: actions/upload-artifact@v4
-    #  with:
-    #    name: junit-report
-    #    path: report/junit-report/junit.xml
-    #    retention-days: 30
+        path: ${{ github.workspace }}/report/
+        if-no-files-found: warn
+        retention-days: 30
