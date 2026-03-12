@@ -36,17 +36,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-     
-      # Download reports artifact
-      - name: Download reports artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: reports
-          path: report
-          run-id: ${{ github.event.workflow_run.id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 🗑️ BURAHIN ANG BUONG REPORT FOLDER (para sigurado)
+     # 🗑️ BURAHIN ANG BUONG REPORT FOLDER (para sigurado)
       - name: Delete old report folder
         run: |
           echo "🗑️ Deleting old report folder..."
@@ -56,6 +47,15 @@ jobs:
           # Gumawa ng bagong report folder
           mkdir -p ./report
           echo "✅ Fresh report folder created"
+          
+      # Download reports artifact
+      - name: Download reports artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: reports
+          path: report
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       # Install Allure
       - name: Install Allure CLI
