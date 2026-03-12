@@ -17,7 +17,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 🧹 SETUP REPORT DIRECTORIES (isang step lang)
+    # 🧹 SETUP REPORT DIRECTORIES
     - name: Setup report directories
       run: |
         echo "🧹 Setting up fresh report directories..."
@@ -67,6 +67,7 @@ jobs:
         echo ""
         echo "📊 Allure Results (should have JSON files):"
         ls -la ${{ github.workspace }}/report/allure-results/ || echo "No allure results"
+        echo "Count: $(find ${{ github.workspace }}/report/allure-results -name '*.json' 2>/dev/null | wc -l)"
         echo ""
         echo "📈 HTML Report:"
         ls -la ${{ github.workspace }}/report/html-report/ || echo "No HTML report"
@@ -76,15 +77,12 @@ jobs:
         echo ""
         echo "🔍 JSON Report:"
         ls -la ${{ github.workspace }}/report/json-report/ || echo "No JSON report"
-        echo ""
-        echo "=== Allure Results Count ==="
-        find ${{ github.workspace }}/report/allure-results -name "*.json" 2>/dev/null | wc -l
         
     - name: Upload reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: reports
-        path: ${{ github.workspace }}/report/
+        path: ${{ github.workspace }}/report/  # ← GINAMIT KO RIN ANG FULL PATH
         if-no-files-found: warn
         retention-days: 60
