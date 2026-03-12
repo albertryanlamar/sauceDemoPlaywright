@@ -84,7 +84,7 @@
         {
           "title": "E2E Test Suite",
           "file": "e2e/e2e.spec.ts",
-          "line": 18,
+          "line": 23,
           "column": 6,
           "specs": [
             {
@@ -103,7 +103,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2479,
+                      "duration": 2584,
                       "errors": [],
                       "stdout": [
                         {
@@ -172,26 +172,26 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_valid",
-                          "duration": 715
+                          "duration": 872
                         },
                         {
                           "title": "Step 2: AddToCart_Sauce Labs Backpack",
-                          "duration": 134
+                          "duration": 87
                         },
                         {
                           "title": "Step 3: viewCart",
-                          "duration": 163
+                          "duration": 152
                         },
                         {
                           "title": "Step 4: checkout_Albert_Lamar_1630",
-                          "duration": 312
+                          "duration": 325
                         },
                         {
                           "title": "Step 5: Logout",
-                          "duration": 1077
+                          "duration": 1071
                         }
                       ],
-                      "startTime": "2026-03-12T06:24:43.128Z",
+                      "startTime": "2026-03-12T08:34:29.650Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -207,7 +207,7 @@
               ],
               "id": "2273f457eefe02023f08-b6d2f5462f1fa51a901e",
               "file": "e2e/e2e.spec.ts",
-              "line": 22,
+              "line": 27,
               "column": 9
             },
             {
@@ -226,7 +226,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2041,
+                      "duration": 2122,
                       "errors": [],
                       "stdout": [
                         {
@@ -275,7 +275,7 @@
                           "text": "Executing step: checkout\n"
                         },
                         {
-                          "text": "[ \u001b[32m'Godfrey'\u001b[39m, \u001b[32m'Crooks'\u001b[39m, \u001b[32m'94068-9270'\u001b[39m ]\n"
+                          "text": "[ \u001b[32m'Declan'\u001b[39m, \u001b[32m\"Schumm-O'Kon\"\u001b[39m, \u001b[32m'90375-4369'\u001b[39m ]\n"
                         },
                         {
                           "text": "Executing step 5: Logout\n"
@@ -298,26 +298,26 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_valid",
-                          "duration": 498
+                          "duration": 562
                         },
                         {
                           "title": "Step 2: AddToCart_Sauce Labs Bike Light_Sauce Labs Backpack",
-                          "duration": 114
+                          "duration": 128
                         },
                         {
                           "title": "Step 3: viewCart",
-                          "duration": 86
+                          "duration": 92
                         },
                         {
                           "title": "Step 4: checkout",
-                          "duration": 230
+                          "duration": 224
                         },
                         {
                           "title": "Step 5: Logout",
-                          "duration": 1079
+                          "duration": 1076
                         }
                       ],
-                      "startTime": "2026-03-12T06:24:46.106Z",
+                      "startTime": "2026-03-12T08:34:32.757Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -333,7 +333,7 @@
               ],
               "id": "2273f457eefe02023f08-365fe1e053c40354be33",
               "file": "e2e/e2e.spec.ts",
-              "line": 22,
+              "line": 27,
               "column": 9
             },
             {
@@ -352,7 +352,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 932,
+                      "duration": 918,
                       "errors": [],
                       "stdout": [
                         {
@@ -379,10 +379,10 @@
                       "steps": [
                         {
                           "title": "Step 1: Login_invalidUsername",
-                          "duration": 854
+                          "duration": 821
                         }
                       ],
-                      "startTime": "2026-03-12T06:24:43.161Z",
+                      "startTime": "2026-03-12T08:34:29.698Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -398,7 +398,7 @@
               ],
               "id": "2273f457eefe02023f08-03bdf70948f2c7e0665f",
               "file": "e2e/e2e.spec.ts",
-              "line": 22,
+              "line": 27,
               "column": 9
             }
           ]
@@ -408,8 +408,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-12T06:24:41.120Z",
-    "duration": 7415.239,
+    "startTime": "2026-03-12T08:34:27.493Z",
+    "duration": 7834.581,
     "expected": 3,
     "skipped": 0,
     "unexpected": 0,
