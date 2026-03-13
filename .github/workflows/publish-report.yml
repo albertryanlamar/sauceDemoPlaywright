@@ -100,7 +100,8 @@ jobs:
         timeout-minutes: 3
         run: |
           git add index.html report/
-          [ -f dashboard.html ] && git add tests.html || true
+          [ -f dashboard.html ] && git add dashboard.html || true
+          [ -f tests.html ] && git add tests.html || true
           [ -f dashboard.json ] && git add dashboard.json || true
           git commit -m "ci: Update report for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
           git push
