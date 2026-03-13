@@ -532,7 +532,7 @@ function generateTestsPage(testStats, allBrowsers, allBranches) {
       <div class="nav-logo-icon">🎭</div>
       <h1>Playwright Dashboard</h1>
     </div>
-    <a href="index.html" class="nav-tab">📊 Overview</a>
+    <a href="dashboard.html" class="nav-tab">📊 Overview</a>
     <a href="tests.html" class="nav-tab active">🧪 Test Analytics</a>
   </nav>
 
@@ -1008,6 +1008,7 @@ function generateDashboard(history, failureArchive) {
       --text: #e2e8f0; --muted: #64748b;
       --font-display: 'Syne', sans-serif; --font-mono: 'JetBrains Mono', monospace;
     }
+      
     body { font-family: var(--font-display); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
     body::before {
       content: ''; position: fixed; inset: 0;
@@ -1025,6 +1026,15 @@ function generateDashboard(history, failureArchive) {
     .header-meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-align: right; }
     .live-dot { display: inline-block; width: 7px; height: 7px; background: var(--pass); border-radius: 50%; margin-right: 5px; animation: blink 1.5s ease-in-out infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        /* ── Nav ── */
+    .nav { display:flex; align-items:center; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap; }
+    .nav-logo { display:flex; align-items:center; gap:0.75rem; margin-right:auto; }
+    .nav-logo-icon { width:38px; height:38px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+    .nav-logo h1 { font-size:1.1rem; font-weight:800; background:linear-gradient(90deg,#fff,var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .nav-tab { font-family:var(--font-mono); font-size:0.75rem; padding:6px 16px; border-radius:6px; border:1px solid var(--border); color:var(--muted); text-decoration:none; transition:all 0.15s ease; background:var(--surface2); }
+    .nav-tab:hover { border-color:var(--accent); color:var(--accent); }
+    .nav-tab.active { background:rgba(0,229,255,0.1); border-color:var(--accent); color:var(--accent); }
 
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
     .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; position: relative; overflow: hidden; animation: slideUp 0.5s ease both; }
