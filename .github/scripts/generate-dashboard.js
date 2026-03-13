@@ -1500,7 +1500,7 @@ function main() {
     duration,
     status,
     conclusion: CONCLUSION,
-    reportUrl: `reports/${BRANCH}/${RUN_ID}/index.html`,
+    reportUrl: `reports/${BRANCH}/${RUN_ID}/dashboard.html`,
     runId: RUN_ID,
   };
 
