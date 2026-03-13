@@ -13,7 +13,7 @@ Checking in the cart item:Sauce Labs Bike Light
 Checking in the cart item:Sauce Labs Backpack
 Executing step 4: checkout
 Executing step: checkout
-[ 'Jodi', 'West', '53056-0826' ]
+[ 'Jacey', 'Deckow', '15657' ]
 Executing step 5: Logout
 Executing step: Logout
 This is a logout step.
