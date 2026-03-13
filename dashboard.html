@@ -14,6 +14,7 @@
       --text: #e2e8f0; --muted: #64748b;
       --font-display: 'Syne', sans-serif; --font-mono: 'JetBrains Mono', monospace;
     }
+      
     body { font-family: var(--font-display); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
     body::before {
       content: ''; position: fixed; inset: 0;
@@ -31,6 +32,15 @@
     .header-meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-align: right; }
     .live-dot { display: inline-block; width: 7px; height: 7px; background: var(--pass); border-radius: 50%; margin-right: 5px; animation: blink 1.5s ease-in-out infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        /* ── Nav ── */
+    .nav { display:flex; align-items:center; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap; }
+    .nav-logo { display:flex; align-items:center; gap:0.75rem; margin-right:auto; }
+    .nav-logo-icon { width:38px; height:38px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+    .nav-logo h1 { font-size:1.1rem; font-weight:800; background:linear-gradient(90deg,#fff,var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .nav-tab { font-family:var(--font-mono); font-size:0.75rem; padding:6px 16px; border-radius:6px; border:1px solid var(--border); color:var(--muted); text-decoration:none; transition:all 0.15s ease; background:var(--surface2); }
+    .nav-tab:hover { border-color:var(--accent); color:var(--accent); }
+    .nav-tab.active { background:rgba(0,229,255,0.1); border-color:var(--accent); color:var(--accent); }
 
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
     .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; position: relative; overflow: hidden; animation: slideUp 0.5s ease both; }
@@ -280,23 +290,23 @@
       </div>
       <div class="header-meta">
         <div><span class="live-dot"></span>Auto-updated on every run</div>
-        <div style="margin-top:4px">Last run: 2026-03-13 02:05:12 UTC</div>
+        <div style="margin-top:4px">Last run: 2026-03-13 02:36:53 UTC</div>
       </div>
     </header>
 
     <div class="stats-grid">
       <div class="stat-card card-total">
         <div class="stat-label">Total Runs</div>
-        <div class="stat-value">5</div>
+        <div class="stat-value">6</div>
         <div class="stat-sub">all time
           <svg class="sparkline" width="120" height="32" viewBox="0 0 120 32">
-            <polyline points="0,0 30,0 60,0 90,0 120,0" />
+            <polyline points="0,0 24,0 48,0 72,0 96,0 120,0" />
           </svg>
         </div>
       </div>
       <div class="stat-card card-pass">
         <div class="stat-label">Passed Runs</div>
-        <div class="stat-value">5</div>
+        <div class="stat-value">6</div>
         <div class="stat-sub">all tests green</div>
       </div>
       <div class="stat-card card-fail">
@@ -325,10 +335,10 @@
         <span class="latest-stat" style="color:var(--pass)">✓ 3 passed</span>
         
         
-        <span class="latest-stat">⏱ 5.9s</span>
-        <span class="latest-stat">2026-03-13 02:05:12 UTC</span>
+        <span class="latest-stat">⏱ 5.7s</span>
+        <span class="latest-stat">2026-03-13 02:36:53 UTC</span>
       </div>
-      <a class="view-btn" href="reports/main/23032885387/dashboard.html" target="_blank">Latest Report <span>→</span></a>
+      <a class="view-btn" href="reports/main/23033634646/dashboard.html" target="_blank">Latest Report <span>→</span></a>
     </div>
 
     <div class="table-wrap">
@@ -343,7 +353,7 @@
             <option value="all">All browsers</option>
             <option value="chrome">chrome</option>
           </select>
-          <span class="run-count" id="runCount">5 runs</span>
+          <span class="run-count" id="runCount">6 runs</span>
         </div>
       </div>
       <table>
@@ -364,6 +374,23 @@
         <tbody id="runTable">
     <tr class="pass" style="animation-delay:0s">
       <td><span class="badge badge-pass">PASS</span></td>
+      <td class="date-cell">2026-03-13 02:36:53 UTC</td>
+      <td><span class="branch-tag">main</span></td>
+      <td class="browser-cell">🌐 chrome</td>
+      <td class="pass-count">3</td>
+      <td class="fail-count zero">0</td>
+      <td class="flaky-count zero">0</td>
+      <td class="duration-cell">5.7s</td>
+      <td>
+        <div class="progress-wrap">
+          <div class="progress-bar progress-pass" style="width:100%"></div>
+          <span class="progress-label">100%</span>
+        </div>
+      </td>
+      <td><a class="view-btn" href="reports/main/23033634646/dashboard.html" target="_blank">View <span>→</span></a></td>
+    </tr>
+    <tr class="pass" style="animation-delay:0.04s">
+      <td><span class="badge badge-pass">PASS</span></td>
       <td class="date-cell">2026-03-13 02:05:12 UTC</td>
       <td><span class="branch-tag">main</span></td>
       <td class="browser-cell">🌐 chrome</td>
@@ -379,7 +406,7 @@
       </td>
       <td><a class="view-btn" href="reports/main/23032885387/dashboard.html" target="_blank">View <span>→</span></a></td>
     </tr>
-    <tr class="pass" style="animation-delay:0.04s">
+    <tr class="pass" style="animation-delay:0.08s">
       <td><span class="badge badge-pass">PASS</span></td>
       <td class="date-cell">2026-03-13 01:56:16 UTC</td>
       <td><span class="branch-tag">main</span></td>
@@ -396,7 +423,7 @@
       </td>
       <td><a class="view-btn" href="reports/main/23032659890/dashboard.html" target="_blank">View <span>→</span></a></td>
     </tr>
-    <tr class="pass" style="animation-delay:0.08s">
+    <tr class="pass" style="animation-delay:0.12s">
       <td><span class="badge badge-pass">PASS</span></td>
       <td class="date-cell">2026-03-12 09:13:37 UTC</td>
       <td><span class="branch-tag">main</span></td>
@@ -413,7 +440,7 @@
       </td>
       <td><a class="view-btn" href="reports/main/22994562372/index.html" target="_blank">View <span>→</span></a></td>
     </tr>
-    <tr class="pass" style="animation-delay:0.12s">
+    <tr class="pass" style="animation-delay:0.16s">
       <td><span class="badge badge-pass">PASS</span></td>
       <td class="date-cell">2026-03-12 08:44:09 UTC</td>
       <td><span class="branch-tag">main</span></td>
@@ -430,7 +457,7 @@
       </td>
       <td><a class="view-btn" href="reports/main/22993512510/index.html" target="_blank">View <span>→</span></a></td>
     </tr>
-    <tr class="pass" style="animation-delay:0.16s">
+    <tr class="pass" style="animation-delay:0.2s">
       <td><span class="badge badge-pass">PASS</span></td>
       <td class="date-cell">2026-03-12 08:34:57 UTC</td>
       <td><span class="branch-tag">main</span></td>
@@ -452,7 +479,7 @@
 
     
 
-    <footer>Generated by playwright-demo-js · 2026-03-13 02:05:12 UTC</footer>
+    <footer>Generated by playwright-demo-js · 2026-03-13 02:36:53 UTC</footer>
   </div>
 
   <script>
